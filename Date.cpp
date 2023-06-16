@@ -100,11 +100,15 @@ public:
         this->year = IsYear(year) ? year : -1;
     }
 
-    bool FailedToConstructValidDate(const Date& date)
+    static bool FailedToConstructValidDate(const Date& date)
     {
         return (date.day == -1 || date.month == -1 || date.year == -1);
     }
 
+    bool FailedToConstructValidDate()
+    {
+        return (this->day == -1 || this->month == -1 || this->year == -1);
+    }
 
     bool FailedToConstructValidDate()
     {
