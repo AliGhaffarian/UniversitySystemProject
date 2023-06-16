@@ -110,11 +110,6 @@ public:
         return (this->day == -1 || this->month == -1 || this->year == -1);
     }
 
-    bool FailedToConstructValidDate()
-    {
-        return (this->day == -1 || this->month == -1 || this->year == -1);
-    }
-
     bool StrIncludesDate(const std::string& dateStr)
     {
 

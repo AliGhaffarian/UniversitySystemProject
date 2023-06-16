@@ -1,6 +1,6 @@
 #ifndef PersonH
 #define PersonH
-
+#include "InputUtility.cpp"
 #include <iostream>
 #include "Date.cpp"
 
@@ -32,6 +32,27 @@ class Person
     }
     void Register(const PersonalInfo& personInfo)
     {
+        //register first name
+        if (personInfo.firstName.size() > 0 && !IsDigit(personInfo.firstName))
+        {
+            this->personInfo.firstName = personInfo.firstName;
+            MakeUpperCase(this->personInfo.firstName);
+        }
+        //register lastname
+        if (personInfo.firstName.size() > 0 && !IsDigit(personInfo.firstName))
+        {
+            this->personInfo.LastName = personInfo.LastName;
+            MakeUpperCase(this->personInfo.LastName);
+        }
+        //register nationalid
+        // will write a better nationalnumber register soon
+        if (IsDigit(personInfo.nationalID))
+        {
+            this->personInfo.nationalID = personInfo.nationalID;
+        }
+        //the date will register by its constructor
+        this->personInfo.dateOfBirth = personInfo.dateOfBirth;
+
     }
 
 };
