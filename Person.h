@@ -1,6 +1,7 @@
 #ifndef PersonH
 #define PersonH
 #include "InputUtility.cpp"
+#include "Utility.cpp"
 #include <iostream>
 #include "Date.cpp"
 
@@ -39,7 +40,7 @@ class Person
     }
     void SetFirstName (const std::string& firstName)
     {
-        if (firstName.size() > 0 && !IsDigit(firstName))
+        if (IsName(firstName))
         {
             this->personInfo.firstName = firstName;
             this->personInfo.firstName[0] = toupper(this->personInfo.firstName[0]);
@@ -48,7 +49,7 @@ class Person
 
     void SetLastName (const std::string& lastName)
     {
-       if (lastName.size() > 0 && !IsDigit(lastName))
+       if (IsName(lastName))
         {
             this->personInfo.LastName = lastName;
             this->personInfo.LastName[0] = toupper(this->personInfo.LastName[0]);
@@ -57,7 +58,7 @@ class Person
 
     void SetNationalID (const std::string& nationalID)
     {
-        if (IsDigit(nationalID))
+        if (IsNationalID(nationalID))
         {
             this->personInfo.nationalID = nationalID;
         }
@@ -65,6 +66,11 @@ class Person
     void SetDate (const Date& dateOfBirth)
     {
         this->personInfo.dateOfBirth = dateOfBirth;
+    }
+
+    bool IsNationalID(const std::string& ID)
+    {
+        return (IsDigit(ID));
     }
 };
 

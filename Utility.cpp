@@ -32,6 +32,13 @@ bool IsDigit(std::string str)
             return false;
     return true;
 }
+bool IsName(const std::string& name)
+{
+    return (name.size() > 0 && !IsDigit(name));
+}
 
+/*float AvgCalculator(vector<Course> courseVector)
+{
+}*/
 
 #endif
