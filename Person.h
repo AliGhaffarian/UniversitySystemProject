@@ -30,31 +30,42 @@ class Person
         //using namespace std;
         //Register(personInfo);
     }
-    void Register(const PersonalInfo& personInfo)
+    virtual void Register(const PersonalInfo& personInfo)
     {
-        //register first name
-        if (personInfo.firstName.size() > 0 && !IsDigit(personInfo.firstName))
+        SetFirstName( personInfo.firstName );
+        SetLastName( personInfo.LastName );
+        SetNationalID( personInfo.nationalID );
+        SetDate( personInfo.dateOfBirth );
+    }
+    void SetFirstName (const std::string& firstName)
+    {
+        if (firstName.size() > 0 && !IsDigit(firstName))
         {
-            this->personInfo.firstName = personInfo.firstName;
-            MakeUpperCase(this->personInfo.firstName);
+            this->personInfo.firstName = firstName;
+            this->personInfo.firstName[0] = toupper(this->personInfo.firstName[0]);
         }
-        //register lastname
-        if (personInfo.firstName.size() > 0 && !IsDigit(personInfo.firstName))
-        {
-            this->personInfo.LastName = personInfo.LastName;
-            MakeUpperCase(this->personInfo.LastName);
-        }
-        //register nationalid
-        // will write a better nationalnumber register soon
-        if (IsDigit(personInfo.nationalID))
-        {
-            this->personInfo.nationalID = personInfo.nationalID;
-        }
-        //the date will register by its constructor
-        this->personInfo.dateOfBirth = personInfo.dateOfBirth;
-
     }
 
+    void SetLastName (const std::string& lastName)
+    {
+       if (lastName.size() > 0 && !IsDigit(lastName))
+        {
+            this->personInfo.LastName = lastName;
+            this->personInfo.LastName[0] = toupper(this->personInfo.LastName[0]);
+        }
+    }
+
+    void SetNationalID (const std::string& nationalID)
+    {
+        if (IsDigit(nationalID))
+        {
+            this->personInfo.nationalID = nationalID;
+        }
+    }
+    void SetDate (const Date& dateOfBirth)
+    {
+        this->personInfo.dateOfBirth = dateOfBirth;
+    }
 };
 
 #endif // Person
