@@ -4,6 +4,7 @@
 #include "Utility.cpp"
 #include <iostream>
 #include "Date.cpp"
+#include <vector>
 
 // this way we can change the program faster
 
@@ -22,14 +23,16 @@ class Person
 {
 
 
+protected:
     PersonalInfo personInfo;
 
     public:
-
-    Person ()
+    virtual void pure() = 0 ;
+    Person (std::string name , std::string lname , std::string id)
     {
-        //using namespace std;
-        //Register(personInfo);
+        SetFirstName(name);
+        SetLastName(lname);
+        SetNationalID(id);
     }
     virtual void Register(const PersonalInfo& personInfo)
     {

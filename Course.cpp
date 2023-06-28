@@ -7,9 +7,8 @@ struct CourseInfo
 
 
     std::string name = "InvalidCourseName";
-    float grade = -1;
     int unit = -1;
-    int accessType = -1;//defining who can have this course
+    std::string accessType = "InvalidAccessType";//defining who can have this course
 
 
 };
@@ -21,12 +20,10 @@ class Course
     friend std::istream& operator >> (std::istream& input , Course& course)
     {
        std::string name;
-       float grade;
        int unit;
-       int accessType;
-       input >> name >> grade >> unit >> accessType;
+       std::string accessType;
+       input >> name >> accessType;
        course.SetName(name);
-       course.SetGrade(grade);
        course.SetUnit(unit);
        course.SetAcces(accessType);
        return input;
@@ -35,8 +32,8 @@ class Course
 
     friend std::ostream& operator << (std::ostream& output , Course& course)
     {
-       output << "course name :  "<< course.courseInfo.name << "\t" << "grade :  "<< course.courseInfo.grade
-       << "\t" << "unit" <<course.courseInfo.unit << std::endl;
+       output << "course name :  "<< course.courseInfo.name <<
+       "\t" << "unit" <<course.courseInfo.unit << std::endl;
        return output;
     }
 
@@ -51,10 +48,9 @@ public:
     {
     }
 
-    Course(std::string name , float grade , int unit , int accessType)
+    Course(std::string name , int unit , std::string accessType)
     {
        SetName(name);
-       SetGrade(grade);
        SetUnit(unit);
        SetAcces(accessType);
     }
@@ -62,7 +58,6 @@ public:
     Course(const Course& course)//copy constructor
     {
        this->courseInfo.name = course.courseInfo.name;
-       this->courseInfo.grade = course.courseInfo.grade;
        this->courseInfo.unit = course.courseInfo.unit;
        this->courseInfo.accessType= course.courseInfo.accessType;
     }
@@ -75,14 +70,6 @@ public:
        }
     }
 
-    void SetGrade(const float grade)
-    {
-       if(IsGrade(grade))
-       {
-          this->courseInfo.grade = grade;
-       }
-    }
-
     void SetUnit(const int unit)
     {
        if(IsUnit(unit))
@@ -91,9 +78,10 @@ public:
        }
     }
 
-    void SetAcces(const int access)
+    void SetAcces(const std::string access)
     {
        this->courseInfo.accessType = access;
+       this->courseInfo.accessType [0] = toupper( this->courseInfo.accessType[0] );
     }
 
     bool IsGrade(float grade)
