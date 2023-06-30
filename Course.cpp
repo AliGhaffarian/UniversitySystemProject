@@ -2,10 +2,9 @@
 #define COURSEH
 #include "iostream"
 #include "Date.cpp"
+#include "Utility.cpp"
 struct CourseInfo
 {
-
-
     std::string name = "InvalidCourseName";
     int unit = -1;
     std::string accessType = "InvalidAccessType";//defining who can have this course
@@ -13,8 +12,7 @@ struct CourseInfo
 
 class Course
 {
-
-
+    friend class Student;
     friend std::istream& operator >> (std::istream& input, Course& course)
     {
         std::string name;
@@ -98,6 +96,10 @@ public:
     std::string GetCourseName() const
     {
         return courseInfo.name;
+    }
+    CourseInfo GetCourse()
+    {
+        return courseInfo;
     }
 };
 #endif // COURSEH

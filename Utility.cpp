@@ -1,6 +1,9 @@
 #ifndef UtilityH
 #define UtilityH
+#include "Person.cpp"
+#include <vector>
 #include <iostream>
+#include "Course.cpp"
 int CharFrequency(std::string str, char c)
 {
     int counter = 0;
@@ -32,13 +35,19 @@ bool IsDigit(std::string str)
             return false;
     return true;
 }
+
 bool IsName(const std::string& name)
 {
     return (name.size() > 0 && !IsDigit(name));
 }
 
-/*float AvgCalculator(vector<Course> courseVector)
+int SearchTeacher()
 {
-}*/
+    return 1;
+}
 
+int SearchCourse()
+{
+    return 1;
+}
 #endif
