@@ -5,17 +5,20 @@
 
 struct grade
 {
-    std::string name;//set
-    float score;//set
+    std::string name = "InvalidCourseName";//set
+    float score = -1;//set
 };
 
-struct term {
+struct term
+{
     std::vector<grade> gradeList;//set
-    float termAverage;//set
+    float termAverage = -1;//set
+    int currentunits = -1;
 };
 
 struct studentInfo
 {
+    std::string studentMajor = "InvalidMajor";
     int studentID = -1;
     Date dateOfJoin = Date(0, 0, 0);
     std::vector<term> termList;//set
@@ -74,12 +77,12 @@ public:
         this->studentinfo.studentID = idCounter;
     }
 //----------------------------------------------------------------------------------------------------------------
-    void SetCourseName(std::string name , int termIndex)
+    void SetCourseName(std::string name )
     {
-        grade temp;
-        temp.name = name;
-        temp.score = 0;
-        this->studentinfo.termList[termIndex].gradeList.push_back(temp);
+        int termSize = this->studentinfo.termList.size() - 1;
+        int courseSize = this->studentinfo.termList[termSize].gradeList.size();
+        this->studentinfo.termList[termSize].gradeList.resize(courseSize + 1);
+        this->studentinfo.termList[termSize].gradeList[courseSize].name = name;
     }
 //----------------------------------------------------------------------------------------------------------------
     void RegisterGrade(float gradee , std::string name , int termIndex) //for add a course to student
@@ -95,26 +98,55 @@ public:
 //----------------------------------------------------------------------------------------------------------------
     void SetGrade(int termIndex , float termGrade , int gradeIndex )
     {
-         this->studentinfo.termList[termIndex].gradeList[gradeIndex].score = termGrade;
+
+        this->studentinfo.termList[termIndex].gradeList[gradeIndex].score = termGrade;
+
     }
 //----------------------------------------------------------------------------------------------------------------
-    void SetTerm(int termnum)
+    void SetTerm()
     {
+         std::cout<<this->personInfo.firstName <<"  "<< this->studentinfo.termList.size() << "\n\n";
         this->studentinfo.termList.resize(this->studentinfo.termList.size() + 1);
+        std::cout<< this->studentinfo.termList.size();
     }
 //----------------------------------------------------------------------------------------------------------------
+    void SetMajor(std::string& major)
+    {
+        if(!IsDigit(major))
+        {
+            major[0] = toupper(major[0]);
+            this->studentinfo.studentMajor = major;
+        }
+    }
+//----------------------------------------------------------------------------------------------------------------
+    std::string GetMajor()
+    {
+        return this->studentinfo.studentMajor;
+    }
+//---------------------------------------------------------------------------------------------------------------
+
     void pure() {}
 //----------------------------------------------------------------------------------------------------------------
     void Report(int termIndex)
     {
+        if(termIndex <= this->studentinfo.termList.size())
+     {
+         termIndex--;
+         std::cout<< this->studentinfo.termList[termIndex].gradeList.size();
         for(int i = 0 ; i < this->studentinfo.termList[termIndex].gradeList.size() ; i++)
         {
+            std::cout<< "\n\n sdgsagsadgasg \n" ;
             std::cout<< "Course name : " << this->studentinfo.termList[termIndex].gradeList[i].name
             << "\t grade : " << this->studentinfo.termList[termIndex].gradeList[i].score<<"\n";
         }
+     }
+     else
+        std::cout<< "term is not available \n";
+     getchar();
+     getchar();
     }
 //----------------------------------------------------------------------------------------------------------------
-    int CourseInTerm(std::string courseName)// find index of the term wich have the course in itself
+    int CourseInTerm(std::string courseName)// find index of the term which have the course in itself
     {
         for(int i = 0 ; i < studentinfo.termList.size() ; i++)
         {
@@ -167,6 +199,7 @@ public:
              tempGrade += this->studentinfo.termList[termIndex].gradeList[i].score*tempUnit;
              tempSumOfUnits +=tempGrade;
          }
+         this->studentinfo.termList[termIndex].currentunits = tempSumOfUnits;
          this->studentinfo.termList[termIndex].termAverage = tempGrade/tempSumOfUnits;
      }
 //----------------------------------------------------------------------------------------------------------------
@@ -178,6 +211,19 @@ public:
              temp += this->studentinfo.termList[i].termAverage;
          }
          this->studentinfo.totallAverage = temp;
+     }
+//----------------------------------------------------------------------------------------------------------------
+     int GetTermSize(std::vector<Person*>& listt)
+     {
+         return this->studentinfo.termList.size();
+     }
+//----------------------------------------------------------------------------------------------------------------
+     int GetPickedUnits(int termIndex)
+     {
+         if(this->studentinfo.termList.size() > termIndex)
+            return this->studentinfo.termList[termIndex].currentunits;
+        else
+            return -1;
      }
 
 };

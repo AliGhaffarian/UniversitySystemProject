@@ -18,9 +18,9 @@ class Course
         std::string name;
         int unit;
         std::string accessType;
-        std::cout << "Enter Course name :  ";
+        std::cout << "\n Enter Course name :  ";
         input >> name;
-        std::cout << "\n Which scientific Group is this course belong to";
+        std::cout << "\n Which scientific Group is this course belong to :  ";
         input >> accessType;
         std::cout << "\n Enter Course's unit :  ";
         input >> unit;
@@ -38,15 +38,20 @@ class Course
         return output;
     }
 
+
 protected:
 
     CourseInfo courseInfo;
 
 public:
-
-    Course()
+    const Course& operator = (const Course& right)
     {
+        this->courseInfo.accessType = right.courseInfo.accessType;
+        this->courseInfo.name = right.courseInfo.name;
+        this->courseInfo.unit = right.courseInfo.unit;
     }
+
+    Course() {}
 
     Course(std::string name, int unit, std::string accessType)
     {
@@ -67,6 +72,7 @@ public:
         if (IsName(name))
         {
             this->courseInfo.name = name;
+            this->courseInfo.name[0] = toupper(name[0]);
         }
     }
 

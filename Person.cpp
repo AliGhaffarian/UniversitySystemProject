@@ -119,13 +119,13 @@ public:
 
 //----------------------------------------------------------------------------------------------------------------
 
-    virtual void SetCourseName(std::string name , int termIndex) {}
+    virtual void SetCourseName(std::string name ) {}
 
     virtual void RegisterGrade(float gradee , std::string name , int termIndex) {}
 
     virtual void SetGrade(int termIndex , float termGrade , int gradeIndex ) {}
 
-    virtual void SetTerm(int termnum) {}
+    virtual void SetTerm() {}
 
     virtual void Report(int termIndex) {}
 
@@ -149,7 +149,7 @@ public:
 
     virtual void EditCourse(std::vector<Course>& courseList , std::string courseName) {}
 
-    virtual void AddCourse(std::vector<Course> courseList , std::vector<Person*> studentList , int index , std::string courseName , int termIndex) {}
+    virtual void AddCourse(std::vector<Course> courseList , std::vector<Person*> studentList , int index , std::string courseName ) {}
 
     virtual int SearchStudent( std::string studentName ,std::vector<Person*>& studentList ) {}
 
@@ -157,8 +157,21 @@ public:
 
     virtual void EditTeacher(std::string name , std::vector<Person*>& List) {}
 
-    virtual void RegisterGrade(Person* Student , int termIndex , int gradeIndex , float grade) {}
+    virtual  void RegisterGrade(std::vector<Person*>& student , int gradeIndex , int studentIndex, float grade,std::string courseName) {}
+
+    virtual int GetTermSize(std::vector<Person*>& listt) {}
+
+    virtual int GetPickedUnits(int termIndex) {}
+
+    virtual void RegisterTerm (std::vector<Person*> listt , int index ) {}
+
+    virtual void SetMajor(std::string& major) {}
+
+    virtual void SetDepartment(std::string name) {}
+
+    virtual std::string GetMajor() {}
 
 };
+
 
 #endif // Person

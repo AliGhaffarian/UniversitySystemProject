@@ -39,7 +39,7 @@ public:
         Student* temp;
         temp = new Student;
         StudentList.push_back(temp);
-        std::string firstName, lastName, nationalID;
+        std::string firstName, lastName, nationalID , major;
         std::cout << "Enter firstname " << std::endl;
         std::cin >> firstName;
         StudentList[StudentList.size()-1]->SetFirstName(firstName);
@@ -49,6 +49,9 @@ public:
         std::cout << "Enter national ID " << std::endl;
         std::cin >> nationalID;
         StudentList[StudentList.size()-1]->SetNationalID(nationalID);
+        std::cout << "Enter student major " << std::endl;
+        std::cin >> major;
+        StudentList[StudentList.size()-1]->SetMajor(major);
     }
 //----------------------------------------------------------------------------------------------------------------
     void EditStudent(std::string name , std::vector<Person*>& List)
@@ -68,7 +71,7 @@ public:
        Teacher* temp;
        temp = new Teacher;
        TeacherList.push_back(temp);
-       std::string firstName, lastName, nationalID;
+       std::string firstName, lastName, nationalID,department;
        std::cout << "Enter firstname " << std::endl;
        std::cin >> firstName;
        TeacherList[TeacherList.size()-1]->SetFirstName(firstName);
@@ -78,6 +81,9 @@ public:
        std::cout << "Enter national ID " << std::endl;
        std::cin >> nationalID;
        TeacherList[TeacherList.size()-1]->SetNationalID(nationalID);
+       std::cout << "Enter teacher department " << std::endl;
+       std::cin >> department;
+       TeacherList[TeacherList.size()-1]->SetDepartment(department);
    }
 //----------------------------------------------------------------------------------------------------------------
    void EditTeacher(std::string name , std::vector<Person*>& List)
@@ -95,7 +101,7 @@ public:
    void RegisterCourse(std::vector<Course>& courseList)
     {
         Course temp;
-        std::cin >> temp ;
+        std::cin >> temp;
         courseList.push_back(temp);
     }
 //----------------------------------------------------------------------------------------------------------------
@@ -111,11 +117,13 @@ public:
         }
     }
 //----------------------------------------------------------------------------------------------------------------
-    void AddCourse(std::vector<Course>& courseList , std::vector<Person*> studentList , int index , std::string courseName , int termIndex)  // add an existing course to student
+    void AddCourse(std::vector<Course>& courseList , std::vector<Person*>& studentList , int index , std::string courseName )  // add an existing course to student
     {
+        std::cout<<" \n add course \n";
         if (CourseExist(courseName , courseList))
         {
-             studentList[index]->SetCourseName(courseName , termIndex);
+            std::cout<<" \n add course \n";
+             studentList[index]->SetCourseName(courseName);
         }
     }
 //----------------------------------------------------------------------------------------------------------------
@@ -139,6 +147,11 @@ public:
                 return true;
         }
         return false;
+    }
+//----------------------------------------------------------------------------------------------------------------
+    void RegisterTerm (std::vector<Person*> listt , int index )
+    {
+        listt[index]->SetTerm();
     }
 };
 #endif // EMPLOYEE_H

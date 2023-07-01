@@ -41,7 +41,11 @@ protected:
 public:
     void pure(){}
 
-    Teacher() {}
+    Teacher() {
+        personInfo.type = 3;
+        teacherCounter++;
+        teacherInfo.membershipNumber = teacherCounter;
+    }
 
     Teacher(std::string name, std::string lname, std::string id , float payment , std::string department): Person( name, lname, id)
     {
@@ -56,9 +60,23 @@ public:
         *this = right;
     }
 
-    void RegisterGrade(Person* Student , int termIndex , int gradeIndex , float grade)
+    void RegisterGrade(std::vector<Person*>& student , int gradeIndex , int studentIndex, float grade,std::string courseName)
     {
-        Student->SetGrade(termIndex , grade , gradeIndex);
+        int termIndex = student[studentIndex]->CourseInTerm(courseName);
+        if(this->teacherInfo.department == student[studentIndex]->GetMajor() ){
+        student[studentIndex]->SetGrade(termIndex , grade , gradeIndex);
+        }
+        else
+            std::cout<<"you dont have access to register grade for this course\n";
+    }
+
+    void SetDepartment(std::string name)
+    {
+        if(!IsDigit(name))
+        {
+            name[0]=toupper(name[0]);
+            teacherInfo.department =name;
+        }
     }
 };
 int Teacher::teacherCounter = 0;
